@@ -13,15 +13,16 @@ code {
 }
 
 .words-sequence {
-  height: 100vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .word-box {
   display: flex;
   justify-content: center;
+  align-items:center;
 }
 
 .letter-box {

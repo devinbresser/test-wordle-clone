@@ -3,6 +3,7 @@ import LetterBox from "./LetterBox";
 import Word from "./Word";
 
 export default function App() {
+  
   return (
     <div className="words-sequence">
       <Word id="first-guess" />
