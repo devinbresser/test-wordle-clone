@@ -7,26 +7,25 @@ export default class Word extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: true,
-      lettersArray: ["", "", "", "", ""]
+      lettersArray: ["", "", "", "", ""],
     };
-    //  this.toggleVis = this.toggleVis.bind(this);
+    //  this.guess = this.guess.bind(this);
   }
 
-  // // determines whether the current input is a valid 5-letter word
-  // isValidWord(characters) {
-  //   if (characters.length == 5) return true;
-  //   return false;
-  // };
-
-  toggleVis() {
-     if (isValidWord(this.state.lettersArray.join(""))) {
-      this.setState({ isActive: false });
-     }
+  // determines whether the current input is a valid 5-letter word
+  isValidWord(characters) {
+    //end game if guess is correct
+    // if(characters == this.props.correctWord){
+    //   alert('Correct')
+    //   return true;
+    // }
+    if (characters.length == 5) return true;
+    return false;
   }
 
+  //update letter array with new contents
   updateWord(letter, index) {
-    const newArray = this.state.lettersArray.slice();
+    let newArray = this.state.lettersArray.slice();
     newArray[index] = letter;
     this.setState({ lettersArray: newArray });
   }
@@ -34,36 +33,47 @@ export default class Word extends Component {
   render() {
     return (
       <div>
-        {this.state.isActive && (
-          <div className="word-box">
-            <LetterBox
-              letterIndex={0}
-              updateWord={(letter, index) => this.updateWord(letter, index)}
+        {/* {(this.state.wordState == "inactive" ||
+          this.state.wordState == "inactive-past") && ( */}
+        <div className="word-box">
+          <LetterBox
+            letterId={0}
+            wordStates={this.state.wordStates}
+            updateWord={(letter, index) => this.updateWord(letter, index)}
+          />
+          <LetterBox
+            letterId={1}
+            wordStates={this.state.wordStates}
+            updateWord={(letter, index) => this.updateWord(letter, index)}
+          />
+          <LetterBox
+            letterId={2}
+            wordStates={this.state.wordStates}
+            updateWord={(letter, index) => this.updateWord(letter, index)}
+          />
+          <LetterBox
+            letterId={3}
+            wordStates={this.state.wordStates}
+            updateWord={(letter, index) => this.updateWord(letter, index)}
+          />
+          <LetterBox
+            letterId={4}
+            wordStates={this.state.wordStates}
+            updateWord={(letter, index) => this.updateWord(letter, index)}
+          />
+          {
+            <EnterButton
+              wordId={this.props.wordId}
+              guess={(id) => this.props.guess(id)}
+              currentWordIndex={this.props.currentWordIndex}
+              lettersArray={this.state.lettersArray.join("")}
+              //isValidWord={() => this.props.isValidWord} why didn't this work?
+              nextWord={() => this.props.nextWord()}
             />
-            <LetterBox
-              letterIndex={1}
-              updateWord={(letter, index) => this.updateWord(letter, index)}
-            />
-            <LetterBox
-              letterIndex={2}
-              updateWord={(letter, index) => this.updateWord(letter, index)}
-            />
-            <LetterBox
-              letterIndex={3}
-              updateWord={(letter, index) => this.updateWord(letter, index)}
-            />
-            <LetterBox
-              letterIndex={4}
-              updateWord={(letter, index) => this.updateWord(letter, index)}
-            />
-            {
-              <EnterButton
-                someText={this.state.lettersArray.join("")}
-                toggle={() => this.toggleVis()}
-              />
-            }
-          </div>
-        )}
+          }
+          <p>{this.props.wordId} {this.props.wordStates[this.props.wordId]}</p>
+        </div>
+        {/* )} */}
       </div>
     );
   }

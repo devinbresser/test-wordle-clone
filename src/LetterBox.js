@@ -7,13 +7,12 @@ export default class LetterBox extends Component {
     this.changeLetter = this.props.changeLetter;
   }
   handleChange(event) {
-     this.props.updateWord(event.target.value.toUpperCase(), this.props.letterIndex);
+     this.props.updateWord(event.target.value.toUpperCase(), this.props.letterId);
   }
   render() {
     return (
       <input
         className="letter-box"
-        //value={this.state.letter}
         onChange={this.handleChange}
         maxLength="1"
       />
