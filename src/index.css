@@ -25,7 +25,36 @@ code {
   align-items:center;
 }
 
-.letter-box {
+/* state: active */
+.active-word-box{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color:red;
+}
+
+.active-letter-box {
+  font-size: 50px;
+  border-style: solid;
+  border-radius:12%;
+  border-color: black;
+  width:1.15em;
+  height:1.15em;
+  margin: 0.2em 0.1em;
+  background-color:rgba(42, 2, 68, 0.301);
+  text-transform:uppercase;
+}
+
+ /* state: inactive-future */
+.inactive-future-word-box{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color:blue;
+  pointer-events:none;
+}
+
+.inactive-future-letter-box {
   font-size: 50px;
   border-style: solid;
   border-radius:12%;
@@ -35,6 +64,33 @@ code {
   margin: 0.2em 0.1em;
   background-color:rgba(0, 255, 255, 0.219);
   text-transform:uppercase;
+}
+
+/* state: inactive-previous */
+
+.inactive-previous-word-box{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color:green;
+  pointer-events:none;
+}
+
+.inactive-previous-letter-box {
+  font-size: 50px;
+  border-style: solid;
+  border-radius:12%;
+  border-color: black;
+  width:1.15em;
+  height:1.15em;
+  margin: 0.2em 0.1em;
+  background-color:rgba(0, 255, 255, 0.219);
+  text-transform:uppercase;
+}
+
+.inactive-previous-letter-box .unknown{
+  background-color:black;
+  text-transform:lowercase;
 }
 
 /* .letter-box-input {
