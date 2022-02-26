@@ -88,8 +88,13 @@ code {
   text-transform:uppercase;
 }
 
-.inactive-previous-letter-box .unknown{
-  background-color:black;
+.inactive-previous-letter-box.correct-right-place{
+  background-color:green;
+  text-transform:lowercase;
+}
+
+.inactive-previous-letter-box.correct-wrong-place{
+  background-color:red;
   text-transform:lowercase;
 }
 

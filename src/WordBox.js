@@ -13,7 +13,6 @@ export default class WordBox extends Component {
         "inactive-future",
         "inactive-future",
       ],
-      correctWord: "REACT",
     };
   }
 
@@ -24,19 +23,9 @@ export default class WordBox extends Component {
     this.setState({ currentWordIndex: newWordNumber });
   }
 
-  //compare the input guess to the correct response
-  compareGuess(letters) {
-    for(let i=0; i<letters.length; i++){
-      if(letters[i]==this.state.correctWord[i]){
-        console.log("Correct letter: ", letters[i])
-      }
-    }
-  }
 
   //disable the current guess only if it is a valid 5 letter word
   makeGuess(letters, id) {
-    //compare text to correct response and color accordingly
-    this.compareGuess(letters);
     //update states
     let newArray = [...this.state.wordStates];
     newArray[id] = "inactive-previous";
@@ -50,6 +39,7 @@ export default class WordBox extends Component {
         <Word
           id="0-word"
           wordId={0}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
@@ -57,6 +47,7 @@ export default class WordBox extends Component {
         <Word
           id="1-word"
           wordId={1}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
@@ -64,6 +55,7 @@ export default class WordBox extends Component {
         <Word
           id="2-word"
           wordId={2}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
@@ -71,6 +63,7 @@ export default class WordBox extends Component {
         <Word
           id="3-word"
           wordId={3}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
@@ -78,6 +71,7 @@ export default class WordBox extends Component {
         <Word
           id="4-word"
           wordId={4}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
@@ -85,6 +79,7 @@ export default class WordBox extends Component {
         <Word
           id="5-word"
           wordId={5}
+          correctWord={this.props.correctWord}
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}

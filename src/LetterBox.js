@@ -13,14 +13,23 @@ export default class LetterBox extends Component {
     );
   }
   render() {
+    //processing to assign css classes to letter boxes
+    //for active and inactive-future words, assign css class
     let className = `${this.props.wordStates[this.props.wordId]}-letter-box`;
-    //override this rule for previous guesses
-    if(this.props.wordStates[this.props.wordId]=="inactive-previous"){
-      className = `inactive-previous-letter-box ${this.props.letterStates[this.props.letterId]}`
-      console.log(`inactive-previous-letter-box ${this.props.letterStates[this.props.letterId]}`)
+
+    //for inactive-previous word, also assign correct-right-place and correct-wrong-place based on guess
+    if (this.props.wordStates[this.props.wordId] == "inactive-previous") {
+      className = `inactive-previous-letter-box ${this.props.assignLetterClass(this.props.letterId)}`;
     }
     return (
-      <input className="inactive-previous-letter-box unknown" onChange={this.handleChange} maxLength="1" />
+      <div>
+        <input
+          className={className}
+          onChange={this.handleChange}
+          maxLength="1"
+        />
+        <p>{className}, {this.props.letterId}</p>
+      </div>
     );
   }
 }

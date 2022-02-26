@@ -6,6 +6,6 @@ import WordBox from "./WordBox"
 export default function App() {
   
   return (
-    <WordBox />
+    <WordBox correctWord = "REACT" />
   );
 }
