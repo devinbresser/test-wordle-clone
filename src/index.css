@@ -12,90 +12,73 @@ code {
     monospace;
 }
 
+/* base classes */
 .words-sequence {
   height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .word-box {
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
+}
+
+.letter-box {
+  font-size: 50px;
+  font-family: "Inter", sans-serif;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  border-style: solid;
+  border-radius: 12%;
+  border-color: black;
+  width: 1.08em;
+  height: 1.08em;
+  margin: 0.2em 0.1em;
+}
+
+.enter-button {
+  position: absolute;
 }
 
 /* state: active */
-.active-word-box{
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  color:red;
+.word-box.active {
+  pointer-events: all;
 }
 
-.active-letter-box {
-  font-size: 50px;
-  border-style: solid;
-  border-radius:12%;
-  border-color: black;
-  width:1.15em;
-  height:1.15em;
-  margin: 0.2em 0.1em;
-  background-color:rgba(42, 2, 68, 0.301);
-  text-transform:uppercase;
+.letter-box.active {
+  background-color: rgba(35, 99, 172, 0.438);
 }
 
- /* state: inactive-future */
-.inactive-future-word-box{
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  color:blue;
-  pointer-events:none;
+/* state: inactive-future */
+.word-box.inactive-future {
+  pointer-events: none;
 }
 
-.inactive-future-letter-box {
-  font-size: 50px;
-  border-style: solid;
-  border-radius:12%;
-  border-color: black;
-  width:1.15em;
-  height:1.15em;
-  margin: 0.2em 0.1em;
-  background-color:rgba(0, 255, 255, 0.219);
-  text-transform:uppercase;
+.letter-box.inactive-future {
+  background-color: rgba(0, 255, 255, 0.219);
 }
 
 /* state: inactive-previous */
-
-.inactive-previous-word-box{
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  color:green;
-  pointer-events:none;
+.word-box.inactive-previous {
+  pointer-events: none;
 }
 
-.inactive-previous-letter-box {
-  font-size: 50px;
-  border-style: solid;
-  border-radius:12%;
-  border-color: black;
-  width:1.15em;
-  height:1.15em;
-  margin: 0.2em 0.1em;
-  background-color:rgba(0, 255, 255, 0.219);
-  text-transform:uppercase;
+.letter-box.inactive-previous.unknown {
+  background-color: rgba(53, 53, 53, 0.425);
 }
 
-.inactive-previous-letter-box.correct-right-place{
-  background-color:green;
-  text-transform:lowercase;
+.letter-box.inactive-previous.correct-wrong-place {
+  background-color: rgba(196, 209, 9, 0.644);
+  pointer-events: all;
 }
 
-.inactive-previous-letter-box.correct-wrong-place{
-  background-color:red;
-  text-transform:lowercase;
+.letter-box.inactive-previous.correct-right-place {
+  background-color: rgba(14, 187, 37, 0.575);
 }
 
 /* .letter-box-input {
@@ -107,7 +90,24 @@ code {
   border:none;
 } */
 
-.letter-box:focus{
-  outline:none;
-  background-color:rgba(25, 23, 172, 0.473);
+.letter-box:focus {
+  outline: none;
+  /* background-color:rgba(25, 23, 172, 0.473); */
 }
+
+/* keyboard  */
+
+.simple-keyboard.myTheme1 {
+  background: rgba(0, 0, 0, 0.644);
+  color: white;
+  text-transform: uppercase;
+  max-width: 40vw;
+  min-width: 500px;
+  margin: 5em;
+  font-family: "Inter", sans-serif;
+}
+
+.simple-keyboard.myTheme1 .hg-button {
+  background: gray;
+}
+

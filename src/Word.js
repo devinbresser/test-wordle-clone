@@ -33,8 +33,8 @@ export default class Word extends Component {
   containsExactMatch(string, letter) {
     //"EACT"
     const correctWordSlice = this.props.correctWord.slice(this.props.correctWord.length-string.length);
-    console.log('correctWordSlice: ', correctWordSlice)
-    console.log('guessSlice: ', string)
+    // console.log('correctWordSlice: ', correctWordSlice)
+    // console.log('guessSlice: ', string)
     //"REAT"
     for (let a = 0; a < correctWordSlice.length; a++) {
       if (correctWordSlice[a]==letter && correctWordSlice[a] == string[a]){
@@ -66,7 +66,7 @@ export default class Word extends Component {
   }
 
   render() {
-    let wordClass = `${this.props.wordStates[this.props.wordId]}-word-box`;
+    let wordClass = `word-box ${this.props.wordStates[this.props.wordId]}`;
     return (
       <div>
         {/* {(this.state.wordState == "inactive" ||
@@ -74,6 +74,7 @@ export default class Word extends Component {
         <div className={wordClass}>
           <LetterBox
             letterId={0}
+            virtualKeyboardChange={(input)=>{this.props.virtualKeyboardChange(input)}}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
@@ -112,7 +113,7 @@ export default class Word extends Component {
             letterStates={this.state.letterStates}
             updateWord={(letter, index) => this.updateWord(letter, index)}
           />
-          {
+          { this.props.wordStates[this.props.wordId] == "active" &&
             <EnterButton
               wordId={this.props.wordId}
               wordStates={this.props.wordStates}
@@ -121,9 +122,6 @@ export default class Word extends Component {
               nextWord={() => this.props.nextWord()}
             />
           }
-          <p>
-            {this.props.wordId} {this.props.wordStates[this.props.wordId]}
-          </p>
         </div>
         {/* )} */}
       </div>

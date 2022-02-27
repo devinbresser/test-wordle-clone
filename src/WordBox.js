@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Word from "./Word";
+import Keyboard from 'react-simple-keyboard'; 
+import 'react-simple-keyboard/build/css/index.css'
 
 export default class WordBox extends Component {
   constructor(props) {
@@ -14,6 +16,14 @@ export default class WordBox extends Component {
         "inactive-future",
       ],
     };
+  }
+
+  onChange = (input) => {
+    console.log("Input changed", input);
+  }
+
+  onKeyPress = (button) => {
+    console.log("Button pressed", button);
   }
 
   //increase currentWordIndex state by 1
@@ -83,6 +93,11 @@ export default class WordBox extends Component {
           makeGuess={(letters, id) => this.makeGuess(letters, id)}
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
+        />
+        <Keyboard 
+          onChange={this.onChange}
+          onKeyPress={this.onKeyPress}
+          theme={"hg-theme-default myTheme1"}
         />
       </div>
     );

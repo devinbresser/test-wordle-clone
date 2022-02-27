@@ -5,7 +5,7 @@ export default class EnterButton extends Component {
     return (
       <div>
         <button
-          className="enterButton"
+          className="enter-button"
           onClick={() => {
             //only work if this is the active word
             if (
@@ -17,7 +17,7 @@ export default class EnterButton extends Component {
             }
           }}
         >
-          wordId: {this.props.wordId} Guess {this.props.lettersArray.toString()}
+          GUESS
         </button>
       </div>
     );
