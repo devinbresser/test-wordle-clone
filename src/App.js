@@ -7,7 +7,7 @@ import { findByLabelText } from "@testing-library/react";
 export default function App() {
   
   return (
-      <WordBox correctWord = "WATER" />
+      <WordBox correctWord = "EERIE" />
 
   );
 }

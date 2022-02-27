@@ -57,7 +57,7 @@ export default class Word extends Component {
     //letter is not in correct place, but exists in correct word, and we did not already guess that letter: return correct-wrong-place
     if (
       ( correctWord.includes(guessLetter) ) &&
-      ( !guessWord.slice(0, index).includes(guessLetter) ) &&
+      ( ( guessWord.slice(0, index).includes(guessLetter) ) || ( correctWord.match(new RegExp(guessLetter, "g") || []).length) > 1 ) &&
       ( !this.containsExactMatch(guessWord.join("").toString().slice(index, guessWord.length), guessLetter) )
     ) {
       return "correct-wrong-place";
