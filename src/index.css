@@ -83,7 +83,6 @@ code {
 
 .letter-box.inactive-previous.correct-wrong-place {
   background-color: rgba(196, 209, 9, 0.644);
-  pointer-events: all;
 }
 
 .letter-box.inactive-previous.correct-right-place {

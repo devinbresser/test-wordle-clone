@@ -9,7 +9,7 @@ import 'react-simple-keyboard/build/css/index.css'
 export default function App() {
   return (
     <div className="app">
-      <WordBox correctWord="EERIE" />
+      <WordBox correctWord="QUIET" />
       <Keyboard
         theme={"hg-theme-default myTheme1"}
       />
