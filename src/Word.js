@@ -93,13 +93,13 @@ export default class Word extends Component {
       return "correct-wrong-place";
     }
 
-    console.log("guessLetter: " + guessLetter + " pastSlice: " + pastSlice + " cleanedUpCorrectWord: " + cleanedUpCorrectWord);
+    console.log("guessLetter: " + guessLetter + " pastSlice: " + pastSlice + " cleanedUpCorrectWord: " + cleanedUpCorrectWord + " cleanedUpGuessWord: " + cleanedUpGuessWord);
     
     if (
       //if the number of times we've guessed this already equals the number of occurrences in the correct word, unknown
-      pastSlice.match(new RegExp(guessLetter, "g") || []).length ==
-      correctWord.match(new RegExp(guessLetter, "g") || []).length
-    ) {
+      pastSlice.match(new RegExp(guessLetter, "g") || []).length > 1 &&
+      (pastSlice.match(new RegExp(guessLetter, "g") || []).length == correctWord.match(new RegExp(guessLetter, "g") || []).length)
+      ) {
       console.log("Made it here!");
       return "unknown";
     }
