@@ -17,7 +17,7 @@ export default class EnterButton extends Component {
             }
           }}
         >
-          GUESS
+          GO
         </button>
       </div>
     );

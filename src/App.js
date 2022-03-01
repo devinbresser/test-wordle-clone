@@ -10,9 +10,9 @@ export default function App() {
   return (
     <div className="app">
       <WordBox correctWord="QUIET" />
-      <Keyboard
-        theme={"hg-theme-default myTheme1"}
-      />
+      {/* <Keyboard
+        theme={"hg-theme-default myTheme1"} */}
+      {/* /> */}
     </div>
   );
 }

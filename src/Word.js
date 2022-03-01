@@ -167,6 +167,7 @@ export default class Word extends Component {
             letterStates={this.state.letterStates}
             updateWord={(letter, index) => this.updateWord(letter, index)}
           />
+          
           {this.props.wordStates[this.props.wordId] == "active" && (
             <EnterButton
               wordId={this.props.wordId}

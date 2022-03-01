@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Word from "./Word";
 
-
 export default class WordBox extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +18,11 @@ export default class WordBox extends Component {
 
   onChange = (input) => {
     console.log("Input changed", input);
-  }
+  };
 
   onKeyPress = (button) => {
     console.log("Button pressed", button);
-  }
+  };
 
   //increase currentWordIndex state by 1
   nextWord() {
@@ -31,7 +30,6 @@ export default class WordBox extends Component {
     newWordNumber++;
     this.setState({ currentWordIndex: newWordNumber });
   }
-
 
   //disable the current guess only if it is a valid 5 letter word
   makeGuess(letters, id) {
@@ -45,14 +43,16 @@ export default class WordBox extends Component {
   render() {
     return (
       <div className="words-sequence">
-        <Word
-          id="0-word"
-          wordId={0}
-          correctWord={this.props.correctWord}
-          makeGuess={(letters, id) => this.makeGuess(letters, id)}
-          wordStates={this.state.wordStates}
-          nextWord={() => this.nextWord()}
-        />
+        <div id="first-word">
+          <Word
+            wordId={0}
+            correctWord={this.props.correctWord}
+            makeGuess={(letters, id) => this.makeGuess(letters, id)}
+            wordStates={this.state.wordStates}
+            nextWord={() => this.nextWord()}
+          />
+        </div>
+
         <Word
           id="1-word"
           wordId={1}
@@ -85,14 +85,16 @@ export default class WordBox extends Component {
           wordStates={this.state.wordStates}
           nextWord={() => this.nextWord()}
         />
-        <Word
-          id="5-word"
-          wordId={5}
-          correctWord={this.props.correctWord}
-          makeGuess={(letters, id) => this.makeGuess(letters, id)}
-          wordStates={this.state.wordStates}
-          nextWord={() => this.nextWord()}
-        />
+        <div id="last-word">
+          <Word
+            id="5-word"
+            wordId={5}
+            correctWord={this.props.correctWord}
+            makeGuess={(letters, id) => this.makeGuess(letters, id)}
+            wordStates={this.state.wordStates}
+            nextWord={() => this.nextWord()}
+          />
+        </div>
       </div>
     );
   }
