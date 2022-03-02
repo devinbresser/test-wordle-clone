@@ -7,8 +7,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root{
-  --background-gray: rgba(30, 30, 30, 0.5)
+:root {
+  --background-gray: rgba(30, 30, 30, 0.5);
+  --button-width: 1em;
 }
 
 code {
@@ -18,77 +19,95 @@ code {
 
 /* base classes */
 
-.app{
+.app {
   display: flex;
-  flex-direction:column;
-  align-items:center;
-  background-color:rgba(184, 106, 131, 0.315);
-  height:100vh;
-  width:100vw;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(184, 106, 131, 0.315);
+  height: 100vh;
+  width: 100vw;
 }
-
 
 .words-sequence {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  margin-top:100px;
-  background-color: rgb(36, 36, 36);
-  border-radius:0px;
+  margin-top: 100px;
+  border-radius: 0px;
 }
 
 .word-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left:7.5px;
-  padding-right:7.5px;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+  background-color: rgb(36, 36, 36);
 }
 
 #first-word {
-  padding-top:7.5px;
+  
 }
 
 #last-word {
-  padding-bottom:7.5px;
+  
 }
 
 .letter-box {
-  font-size: 10vw;
+  font-size: 45px;
   font-family: "Inter", sans-serif;
-  color:  rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   text-align: center;
   border-style: solid;
   border-radius: 0;
   border-color: black;
-  border-width:0.03em;
+  border-width: 0.05em;
   width: 1.08em;
   height: 1.08em;
   margin: 0.075em 0.075em;
 }
 
-@media screen and (min-width: 375px) {
-  .letter-box {
-     font-size: 37.5px;
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .letter-box {
-     font-size: 30px;
-  }
-}
-
 .enter-button {
   position:absolute;
-  border-radius:0;
-  height:2.6em;
-  width:2.6em;
-  margin-left:10px;
-  margin-top:-15px;
+  font-size: 22.5px;
   font-family: "Inter", sans-serif;
+  border-radius: 0;
+  height: 2em;
+  width: 3em;
+  margin-left:0.75em;
+  margin-top:-1em;
+}
+
+/* greater than 480px > desktop */
+@media screen and (max-width: 550px) {
+  .letter-box {
+    font-size: 37.5px;
+  }
+  .enter-button {
+    font-size: 18.75px;
+  }
+}
+
+/* phone */
+@media screen and (max-width: 430px) {
+  .letter-box {
+    font-size: 30px;
+  }
+  .enter-button {
+    font-size: 15px;
+  }
+}
+
+/* tiny */
+@media screen and (max-width: 350px) {
+  .letter-box {
+    font-size: 30px;
+  }
+  .enter-button {
+    font-size: 10px;
+  }
 }
 
 /* state: active */
@@ -148,13 +167,12 @@ code {
   color: white;
   text-transform: uppercase;
   margin: 2em;
-  width:50vw;
-  max-width:575px;
-  min-width:450px;
+  width: 50vw;
+  max-width: 575px;
+  min-width: 450px;
   font-family: "Inter", sans-serif;
 }
 
 .simple-keyboard.myTheme1 .hg-button {
   background: gray;
 }
-

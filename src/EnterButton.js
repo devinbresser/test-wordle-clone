@@ -4,8 +4,7 @@ export default class EnterButton extends Component {
   render() {
     return (
       <div>
-        <button
-          className="enter-button"
+        <button className="enter-button"
           onClick={() => {
             //only work if this is the active word
             if (
