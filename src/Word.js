@@ -61,6 +61,28 @@ export default class Word extends Component {
     return guess;
   }
 
+  //helper method countExactMatches
+  countExactMatches(guess, correct){
+    let count=0;
+    for(let a=0; a<guess.length; a++){
+      if(guess[a]==correct[a]){
+        count++;
+      }
+    }
+    return count
+  }
+
+  //helper method numExactMatchesBefore
+  numExactMatchesBefore(guess, correct, index){
+    return this.countExactMatches(guess.slice(0,index), correct);
+  }
+
+  //helper method instancesOf
+  instancesOf(letter, string){
+    let filter = string.match(new RegExp(letter, "g") || []);
+    return filter.length;
+  }
+
   //assign letterStates based on guess
   assignLetterClass(index) {
     let guessLetter = this.state.lettersArray[index];
@@ -68,7 +90,7 @@ export default class Word extends Component {
     let guessWord = this.state.lettersArray.join("").toString();
     let cleanedUpGuessWord = this.removeExactMatches(guessWord, correctWord);
     let cleanedUpCorrectWord = this.removeExactMatches(correctWord, guessWord);
-    let pastSlice = cleanedUpGuessWord.slice(0, index);
+    let pastSlice = cleanedUpGuessWord.slice(0, (index-this.numExactMatchesBefore(guessWord, correctWord, index)));
     // let futureSlice = cleanedUpGuessWord
     //   .join("")
     //   .toString()
@@ -86,19 +108,17 @@ export default class Word extends Component {
       return "unknown";
     }
 
-    //harder case: right letter, wrong place
-    //first clause: first guess of this letter always returns correct-wrong-place UNLESS there's an exact match
+    //harder case: right letter but wrong place
+    //first clause: first guess of this letter always returns correct-wrong-place
     if (!pastSlice.includes(guessLetter)) {
-      //get rid of the first incorrect match from the cleaned up word
       return "correct-wrong-place";
     }
 
-    console.log("guessLetter: " + guessLetter + " pastSlice: " + pastSlice + " cleanedUpCorrectWord: " + cleanedUpCorrectWord + " cleanedUpGuessWord: " + cleanedUpGuessWord);
+    // console.log("guessLetter: " + guessLetter + " pastSlice: " + pastSlice + " cleanedUpCorrectWord: " + cleanedUpCorrectWord + " cleanedUpGuessWord: " + cleanedUpGuessWord);
     
     if (
-      //if the number of times we've guessed this already equals the number of occurrences in the correct word, unknown
-      pastSlice.match(new RegExp(guessLetter, "g") || []).length > 1 &&
-      (pastSlice.match(new RegExp(guessLetter, "g") || []).length == correctWord.match(new RegExp(guessLetter, "g") || []).length)
+      //
+      (this.instancesOf(guessLetter, cleanedUpCorrectWord) <= this.instancesOf(guessLetter, pastSlice))
       ) {
       console.log("Made it here!");
       return "unknown";
@@ -107,8 +127,9 @@ export default class Word extends Component {
     //second clause: we have already guessed the letter
     if (
       //and there is another one in the correct word
-      cleanedUpCorrectWord.match(new RegExp(guessLetter, "g") || []) != null &&
-      cleanedUpCorrectWord.match(new RegExp(guessLetter, "g") || []).length > 1
+      
+      this.instancesOf(guessLetter, cleanedUpCorrectWord) != null &&
+      this.instancesOf(guessLetter, cleanedUpCorrectWord).length > 1
       //
     ) {
       console.log("cleanedUpCorrectWord: " + cleanedUpCorrectWord);
