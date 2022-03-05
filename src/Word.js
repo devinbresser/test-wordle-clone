@@ -1,14 +1,35 @@
 import React, { Component } from "react";
 import LetterBox from "./LetterBox";
 import EnterButton from "./EnterButton";
-import isValidWord from "./isValidWord";
 
 export default class Word extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lettersArray: ["", "", "", "", ""],
+      lettersArray: new Array(this.props.correctWord.length),
     };
+
+
+  }
+
+  focusForward(index) {
+    this[`letter${index+1}`].myInput.focus();
+  }
+
+  focusBackward(index) {
+    this[`letter${index-1}`].myInput.focus();
+  }
+
+  //letter update methods
+  //update letter array with new contents
+  updateWord(letter, index, focus) {
+    let newArray = [...this.state.lettersArray];
+    newArray[index] = letter;
+    this.setState({ lettersArray: newArray });
+    if(focus && index < this.props.correctWord.length-1){
+      this.focusForward(index);
+    }
+
   }
 
   // determines whether the current input is a valid 5-letter word
@@ -22,21 +43,12 @@ export default class Word extends Component {
     return false;
   }
 
-  //update letter array with new contents
-  updateWord(letter, index) {
-    let newArray = [...this.state.lettersArray];
-    newArray[index] = letter;
-    this.setState({ lettersArray: newArray });
-  }
-
   //helper method: containsExactMatch. returns True if an input string contains an exact match with the correct word
   containsExactMatch(string, letter) {
     //"EACT"
     const correctWordSlice = this.props.correctWord.slice(
       this.props.correctWord.length - string.length
     );
-    // console.log('correctWordSlice: ', correctWordSlice)
-    // console.log('guessSlice: ', string)
     //"REAT"
     for (let a = 0; a < correctWordSlice.length; a++) {
       if (correctWordSlice[a] == letter && correctWordSlice[a] == string[a]) {
@@ -62,39 +74,38 @@ export default class Word extends Component {
   }
 
   //helper method countExactMatches
-  countExactMatches(guess, correct){
-    let count=0;
-    for(let a=0; a<guess.length; a++){
-      if(guess[a]==correct[a]){
+  countExactMatches(guess, correct) {
+    let count = 0;
+    for (let a = 0; a < guess.length; a++) {
+      if (guess[a] == correct[a]) {
         count++;
       }
     }
-    return count
+    return count;
   }
 
   //helper method numExactMatchesBefore
-  numExactMatchesBefore(guess, correct, index){
-    return this.countExactMatches(guess.slice(0,index), correct);
+  numExactMatchesBefore(guess, correct, index) {
+    return this.countExactMatches(guess.slice(0, index), correct);
   }
 
   //helper method instancesOf
-  instancesOf(letter, string){
+  instancesOf(letter, string) {
     let filter = string.match(new RegExp(letter, "g") || []);
     return filter.length;
   }
 
-  //assign letterStates based on guess
+  //assign letterActives based on guess
   assignLetterClass(index) {
     let guessLetter = this.state.lettersArray[index];
     let correctWord = this.props.correctWord;
     let guessWord = this.state.lettersArray.join("").toString();
     let cleanedUpGuessWord = this.removeExactMatches(guessWord, correctWord);
     let cleanedUpCorrectWord = this.removeExactMatches(correctWord, guessWord);
-    let pastSlice = cleanedUpGuessWord.slice(0, (index-this.numExactMatchesBefore(guessWord, correctWord, index)));
-    // let futureSlice = cleanedUpGuessWord
-    //   .join("")
-    //   .toString()
-    //   .slice(index, cleanedUpGuessWord.length);
+    let pastSlice = cleanedUpGuessWord.slice(
+      0,
+      index - this.numExactMatchesBefore(guessWord, correctWord, index)
+    );
 
     //simple case: exact match
     if (correctWord[index] == guessLetter) {
@@ -113,13 +124,10 @@ export default class Word extends Component {
     if (!pastSlice.includes(guessLetter)) {
       return "correct-wrong-place";
     }
-
-    // console.log("guessLetter: " + guessLetter + " pastSlice: " + pastSlice + " cleanedUpCorrectWord: " + cleanedUpCorrectWord + " cleanedUpGuessWord: " + cleanedUpGuessWord);
-    
     if (
-      //
-      (this.instancesOf(guessLetter, cleanedUpCorrectWord) <= this.instancesOf(guessLetter, pastSlice))
-      ) {
+      this.instancesOf(guessLetter, cleanedUpCorrectWord) <=
+      this.instancesOf(guessLetter, pastSlice)
+    ) {
       console.log("Made it here!");
       return "unknown";
     }
@@ -127,7 +135,7 @@ export default class Word extends Component {
     //second clause: we have already guessed the letter
     if (
       //and there is another one in the correct word
-      
+
       this.instancesOf(guessLetter, cleanedUpCorrectWord) != null &&
       this.instancesOf(guessLetter, cleanedUpCorrectWord).length > 1
       //
@@ -146,49 +154,51 @@ export default class Word extends Component {
           this.state.wordState == "inactive-past") && ( */}
         <div className={wordClass}>
           <LetterBox
+            ref={(ch) => (this.letter0 = ch)}
             letterId={0}
-            virtualKeyboardChange={(input) => {
-              this.props.virtualKeyboardChange(input);
-            }}
+            focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
-            letterStates={this.state.letterStates}
-            updateWord={(letter, index) => this.updateWord(letter, index)}
+            updateWord={(letter, index, focus) => this.updateWord(letter, index, focus)}
           />
           <LetterBox
+            ref={(ch) => (this.letter1 = ch)}
             letterId={1}
+            focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
-            letterStates={this.state.letterStates}
-            updateWord={(letter, index) => this.updateWord(letter, index)}
+            updateWord={(letter, index, focus) => this.updateWord(letter, index, focus)}
           />
           <LetterBox
+            ref={(ch) => (this.letter2 = ch)}
             letterId={2}
+            focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
-            letterStates={this.state.letterStates}
-            updateWord={(letter, index) => this.updateWord(letter, index)}
+            updateWord={(letter, index, focus) => this.updateWord(letter, index, focus)}
           />
           <LetterBox
+            ref={(ch) => (this.letter3 = ch)}
             letterId={3}
+            focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
-            letterStates={this.state.letterStates}
-            updateWord={(letter, index) => this.updateWord(letter, index)}
+            updateWord={(letter, index, focus) => this.updateWord(letter, index, focus)}
           />
           <LetterBox
+            ref={(ch) => (this.letter4 = ch)}
             letterId={4}
+            focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
             wordId={this.props.wordId}
             wordStates={this.props.wordStates}
-            letterStates={this.state.letterStates}
-            updateWord={(letter, index) => this.updateWord(letter, index)}
+            updateWord={(letter, index, focus) => this.updateWord(letter, index, focus)}
           />
-          
+
           {this.props.wordStates[this.props.wordId] == "active" && (
             <EnterButton
               wordId={this.props.wordId}

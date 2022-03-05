@@ -13,6 +13,7 @@ export default class WordBox extends Component {
         "inactive-future",
         "inactive-future",
       ],
+
     };
   }
 
