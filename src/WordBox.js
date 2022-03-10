@@ -32,7 +32,7 @@ export default class WordBox extends Component {
     this.setState({ currentWordIndex: newWordNumber });
   }
 
-  //disable the current guess only if it is a valid 5 letter word
+  //advance the current guess only if it is a valid 5 letter word
   makeGuess(letters, id) {
     //update states
     let newArray = [...this.state.wordStates];

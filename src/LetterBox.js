@@ -1,8 +1,34 @@
 import React, { Component } from "react";
 
-const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-const goodWords = require('./dictionary.json')
-
+const alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const goodWords = require("./dictionary.json");
 
 export default class LetterBox extends Component {
   constructor(props) {
@@ -10,38 +36,44 @@ export default class LetterBox extends Component {
     this.handleChangeState = this.handleChangeState.bind(this);
     this.changeLetter = this.props.changeLetter;
     this.inputRef = React.createRef();
-    this.state = {
-      value: "",
-    };
+  }
+
+  componentDidMount(){
+    if(this.props.wordStates[this.props.wordId] == "active"){
+      this.myInput.value = this.props.lettersArray[this.props.letterId];
+    }
   }
 
   handleBackspace = (e) => {
-    if (e.keyCode == 8 && this.props.letterId == 0) {
-      this.setState({ value: "" });
-      return;
-    } else if (e.keyCode == 8) {
-      console.log("about to backspace with this index: " + this.props.letterId);
-      this.setState({ value: "" });
-      this.props.focusBackward(this.props.letterId);
+    this.props.updateWord("", this.props.letterId, false);
+    if (e.keyCode != 8) return;
+
+    // first letter - do not jump back
+    if (this.props.letterId == 0) {
+      // this.setState({ value: "" });
+      this.props.updateWord("", this.props.letterId, false);
       return;
     }
+
+    // fix hardcode for scalability
+    if (this.props.letterId == 4) {
+      this.props.focusBackward(this.props.letterId);
+    }
+
+    // middle letters: erase, then jump back
+    this.props.updateWord("", this.props.letterId, false);
+    this.props.focusBackward(this.props.letterId);
+    return;
   };
 
   handleChangeState = (e) => {
-    if (alphabet.includes(e.target.value.toUpperCase())) {
-      console.log(goodWords)
-      this.setState({ value: e.target.value });
-      this.props.updateWord(
-        e.target.value.toUpperCase(),
-        this.props.letterId,
-        true
-      );
-    }
-
-    //PRESS TAB
+    if (!alphabet.includes(e.target.value.toUpperCase())) return;
+    this.props.updateWord(
+      e.target.value.toUpperCase(),
+      this.props.letterId,
+      true
+    );
   };
-  //processing to assign css classes to letter boxes
-  //for active and inactive-future words, assign css class
 
   render() {
     let className = `letter-box ${this.props.wordStates[this.props.wordId]}`;
@@ -55,20 +87,14 @@ export default class LetterBox extends Component {
     return (
       <div>
         <input
+          value={this.props.lettersArray[this.props.letterId]}
           ref={(ip) => (this.myInput = ip)}
-          // onFocus={() => this.props.focusThis(this.props.letterId, true)}
-          // onBlur={() => this.props.focusThis(this.props.letterId, false)}
           className={className}
-          value={this.state.value}
           onKeyDown={this.handleBackspace}
           onChange={this.handleChangeState}
-          //onKeyUp={this.handleChange}
           maxLength="1"
         />
       </div>
     );
   }
 }
-
-//onFocus = {()=>this.props.updateLetterState(this.props.letterId, true)} onBlur = {()=>this.props.updateLetterState(this.props.letterId, false)}
-//{()=>this.props.focusThis(this.props.letterId, true)} onBlur = {()=>this.props.focusThis(this.props.letterId, false)}

@@ -70,7 +70,7 @@ code {
   width: 1.08em;
   height: 1.08em;
   margin: 0.075em 0.075em;
-  /* caret-color:transparent; */
+  caret-color:transparent;
 }
 
 .enter-button {
@@ -162,7 +162,7 @@ code {
 
 .letter-box:focus {
   outline: none;
-  /* background-color:rgba(25, 23, 172, 0.473); */
+  background-color:rgba(25, 23, 172, 0.473);
 }
 
 /* keyboard  */

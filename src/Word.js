@@ -6,7 +6,7 @@ export default class Word extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lettersArray: new Array(this.props.correctWord.length),
+      lettersArray: new Array(this.props.correctWord.length).fill(""),
     };
 
 
@@ -26,6 +26,7 @@ export default class Word extends Component {
     let newArray = [...this.state.lettersArray];
     newArray[index] = letter;
     this.setState({ lettersArray: newArray });
+    console.log("new lettersarray: " + newArray);
     if(focus && index < this.props.correctWord.length-1){
       this.focusForward(index);
     }
@@ -155,6 +156,7 @@ export default class Word extends Component {
         <div className={wordClass}>
           <LetterBox
             ref={(ch) => (this.letter0 = ch)}
+            lettersArray = {this.state.lettersArray}
             letterId={0}
             focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
@@ -164,6 +166,7 @@ export default class Word extends Component {
           />
           <LetterBox
             ref={(ch) => (this.letter1 = ch)}
+            lettersArray = {this.state.lettersArray}
             letterId={1}
             focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
@@ -173,6 +176,7 @@ export default class Word extends Component {
           />
           <LetterBox
             ref={(ch) => (this.letter2 = ch)}
+            lettersArray = {this.state.lettersArray}
             letterId={2}
             focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
@@ -182,6 +186,7 @@ export default class Word extends Component {
           />
           <LetterBox
             ref={(ch) => (this.letter3 = ch)}
+            lettersArray = {this.state.lettersArray}
             letterId={3}
             focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
@@ -191,6 +196,7 @@ export default class Word extends Component {
           />
           <LetterBox
             ref={(ch) => (this.letter4 = ch)}
+            lettersArray = {this.state.lettersArray}
             letterId={4}
             focusBackward ={(index) => this.focusBackward(index)}
             assignLetterClass={(index) => this.assignLetterClass(index)}
