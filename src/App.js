@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <WordBox correctWord="DEERS" />
+      <WordBox correctWord="TREES" />
     </div>
   );
 }

@@ -40,6 +40,9 @@ code {
   align-items: center;
   margin-top: 100px;
   border-radius: 0px;
+  border-style: solid;
+  width:80vw;
+  max-width:500px;
 }
 
 .word-box {
@@ -168,16 +171,25 @@ code {
   margin-top:50px;
   display: flex;
   flex-direction: column;
+  width:90%;
+  border-style:solid;
 }
 
 .row {
   display: flex;
   flex-direction: row;
+  justify-content:center;
 }
 
 .key{
   font-size:20px;
-  min-width:30px;
+  min-width:20px;
+  height:3em;
+  width:2.5em;
+}
+
+.key.unknown{
+  background-color: rgb(32, 32, 32);
 }
 
 .key.correct-right-place{

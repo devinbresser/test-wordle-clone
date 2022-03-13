@@ -32,7 +32,7 @@ export default class WordBox extends Component {
     let newArray = [...this.state.lettersArray];
     newArray[word][index] = letter;
     this.setState({ lettersArray: newArray });
-    console.log("new lettersarray: " + newArray[word]);
+    //console.log("new lettersarray: " + newArray[word]);
     if (focus && index < this.props.correctWord.length - 1) {
       this.focusForward(word, index);
     }
