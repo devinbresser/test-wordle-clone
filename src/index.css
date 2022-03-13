@@ -75,14 +75,11 @@ code {
 
 .enter-button {
   color:black;
-  position:absolute;
   font-size: 22.5px;
   font-family: "Inter", sans-serif;
   border-radius: 0;
   height: 2em;
   width: 3em;
-  margin-left:0.75em;
-  margin-top:-1em;
 }
 
 /* greater than 480px > desktop */
@@ -167,17 +164,26 @@ code {
 
 /* keyboard  */
 
-.simple-keyboard.myTheme1 {
-  background: rgba(0, 0, 0, 0.644);
-  color: white;
-  text-transform: uppercase;
-  margin: 2em;
-  width: 50vw;
-  max-width: 575px;
-  min-width: 450px;
-  font-family: "Inter", sans-serif;
+.keyboard {
+  margin-top:50px;
+  display: flex;
+  flex-direction: column;
 }
 
-.simple-keyboard.myTheme1 .hg-button {
-  background: gray;
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.key{
+  font-size:20px;
+  min-width:30px;
+}
+
+.key.correct-right-place{
+  background-color:rgba(14, 187, 37, 0.575);
+}
+
+.key.correct-wrong-place{
+  background-color:rgb(196, 134, 0);
 }
