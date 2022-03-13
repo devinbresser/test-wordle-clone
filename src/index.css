@@ -186,6 +186,7 @@ code {
   min-width:20px;
   height:3em;
   width:2.5em;
+  -webkit-appearance: none;
 }
 
 .key.unknown{
